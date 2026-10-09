@@ -1,0 +1,218 @@
+{
+  "Header": {
+    "GenerationSoftware": {
+      "Vendor": "KiCad",
+      "Application": "Pcbnew",
+      "Version": "10.0.4-10.0.4~ubuntu24.04.1"
+    },
+    "CreationDate": "2026-10-08T19:23:37-07:00"
+  },
+  "GeneralSpecs": {
+    "ProjectId": {
+      "Name": "lpddr4-test-board",
+      "GUID": "6c706464-7234-42d7-9465-73742d626f61",
+      "Revision": "1.1.5"
+    },
+    "Size": {
+      "X": 110.12,
+      "Y": 90.12
+    },
+    "LayerNumber": 8,
+    "BoardThickness": 1.6,
+    "Finish": "None"
+  },
+  "DesignRules": [
+    {
+      "Layers": "Outer",
+      "PadToPad": 0.125,
+      "PadToTrack": 0.125,
+      "TrackToTrack": 0.125,
+      "MinLineWidth": 0.1,
+      "TrackToRegion": 0.125,
+      "RegionToRegion": 0.125
+    },
+    {
+      "Layers": "Inner",
+      "PadToPad": 0.0,
+      "PadToTrack": 0.0,
+      "TrackToTrack": 0.125,
+      "MinLineWidth": 0.1,
+      "TrackToRegion": 0.125,
+      "RegionToRegion": 0.125
+    }
+  ],
+  "FilesAttributes": [
+    {
+      "Path": "lpddr4-test-board-F_Cu.gtl",
+      "FileFunction": "Copper,L1,Top",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "lpddr4-test-board-In2_Cu.g2",
+      "FileFunction": "Copper,L3,Inr",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "lpddr4-test-board-In5_Cu.g5",
+      "FileFunction": "Copper,L6,Inr",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "lpddr4-test-board-B_Cu.gbl",
+      "FileFunction": "Copper,L8,Bot",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "lpddr4-test-board-F_Paste.gtp",
+      "FileFunction": "SolderPaste,Top",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "lpddr4-test-board-B_Paste.gbp",
+      "FileFunction": "SolderPaste,Bot",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "lpddr4-test-board-F_Silkscreen.gto",
+      "FileFunction": "Legend,Top",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "lpddr4-test-board-B_Silkscreen.gbo",
+      "FileFunction": "Legend,Bot",
+      "FilePolarity": "Positive"
+    },
+    {
+      "Path": "lpddr4-test-board-F_Mask.gts",
+      "FileFunction": "SolderMask,Top",
+      "FilePolarity": "Negative"
+    },
+    {
+      "Path": "lpddr4-test-board-B_Mask.gbs",
+      "FileFunction": "SolderMask,Bot",
+      "FilePolarity": "Negative"
+    },
+    {
+      "Path": "lpddr4-test-board-Edge_Cuts.gm1",
+      "FileFunction": "Profile",
+      "FilePolarity": "Positive"
+    }
+  ],
+  "MaterialStackup": [
+    {
+      "Type": "Legend",
+      "Name": "Top Silk Screen"
+    },
+    {
+      "Type": "SolderPaste",
+      "Name": "Top Solder Paste"
+    },
+    {
+      "Type": "SolderMask",
+      "Thickness": 0.01,
+      "Name": "Top Solder Mask"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "F.Cu"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.1857,
+      "Material": "FR4",
+      "Name": "F.Cu/In1.GND",
+      "Notes": "Type: dielectric layer 1 (from F.Cu to In1.GND)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "In1.GND"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.1857,
+      "Material": "FR4",
+      "Name": "In1.GND/In2.Cu",
+      "Notes": "Type: dielectric layer 2 (from In1.GND to In2.Cu)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "In2.Cu"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.1857,
+      "Material": "FR4",
+      "Name": "In2.Cu/In3.GND",
+      "Notes": "Type: dielectric layer 3 (from In2.Cu to In3.GND)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "In3.GND"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.1857,
+      "Material": "FR4",
+      "Name": "In3.GND/In4.VCC",
+      "Notes": "Type: dielectric layer 4 (from In3.GND to In4.VCC)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "In4.VCC"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.1857,
+      "Material": "FR4",
+      "Name": "In4.VCC/In5.Cu",
+      "Notes": "Type: dielectric layer 5 (from In4.VCC to In5.Cu)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "In5.Cu"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.1857,
+      "Material": "FR4",
+      "Name": "In5.Cu/In6.VCC",
+      "Notes": "Type: dielectric layer 6 (from In5.Cu to In6.VCC)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "In6.VCC"
+    },
+    {
+      "Type": "Dielectric",
+      "Thickness": 0.1857,
+      "Material": "FR4",
+      "Name": "In6.VCC/B.Cu",
+      "Notes": "Type: dielectric layer 7 (from In6.VCC to B.Cu)"
+    },
+    {
+      "Type": "Copper",
+      "Thickness": 0.035,
+      "Name": "B.Cu"
+    },
+    {
+      "Type": "SolderMask",
+      "Thickness": 0.01,
+      "Name": "Bottom Solder Mask"
+    },
+    {
+      "Type": "SolderPaste",
+      "Name": "Bottom Solder Paste"
+    },
+    {
+      "Type": "Legend",
+      "Name": "Bottom Silk Screen"
+    }
+  ]
+}

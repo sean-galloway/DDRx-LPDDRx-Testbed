@@ -1,0 +1,19 @@
+Designator,Name,Footprint,Manufacturer,MPN,Description,Quantity,Datasheet,LCSC Part #,Sourcing
+"C1,C2,C3,C4,C5,C6,C7,C8,C9,C10,C11,C12,C13,C14,C15,C18,C23,C24,C25,C26,C28,C30,C32",100n,antmicro-footprints:C_0201,YAGEO,CC0201KRX6S5BB104,,23,https://www.yageo.com/en/Chart/Download/pdf/CC0201KRX6S5BB104,,
+"C34,C37",4u7,antmicro-footprints:C_0402_1005Metric,Murata,GRM155R61A475MEAAD,,2,,,
+"C38,C39",100n,antmicro-footprints:C_0402_1005Metric,Murata,GRM155R61H104KE14D,,2,https://search.murata.co.jp/Ceramy/image/img/A01X/G101/ENG/GRM155R61H104KE14-01.pdf,,
+"D1,D2,D3,D4",LED_G_0603_KP-1608CGCK,antmicro-footprints:LED_0603_1608Metric_G,Kingbright,KP-1608CGCK,,4,http://www.farnell.com/datasheets/2045956.pdf,,
+"FB1,FB2,FB3",220Z/1.5A,antmicro-footprints:FB_0805_2012Metric,Würth Elektronik,742792022,,3,https://www.we-online.com/katalog/datasheet/742792022.pdf,,
+IC1,PCA6408A_TSSOP,antmicro-footprints:TSSOP-16_4.4x5mm_P0.65mm,NXP,PCA6408APW,,1,https://www.mouser.com/datasheet/2/302/PCA6408A-1127604.pdf,,
+IC2,AT24CS01_SOT23,antmicro-footprints:SOT-23-5,Atmel,AT24CS01-ST,,1,http://ww1.microchip.com/downloads/en/devicedoc/Atmel-8815-SEEPROM-AT24CS01-02-Datasheet.pdf,,
+L1,2.2uH/1.5A,antmicro-footprints:L_0806_2016Metric,Murata,1285AS-H-2R2M=P2,,1,https://search.murata.co.jp/Ceramy/image/img/P02/J(E)TE243A-0011.pdf,,
+N1,antmicro_logo,antmicro-footprints:antmicro-logo_scaled_20mm,,,,1,,,no physical part - do not order
+N2,oshw_logo,antmicro-footprints:oshw-logo,,,,1,,,no physical part - do not order
+"R1,R5",1k,antmicro-footprints:R_0402_1005Metric,Bourns,CR0402-FX-1001GLF,,2,https://www.bourns.com/docs/product-datasheets/cr.pdf,,
+"R2,R4,R7,R15,R16,R17,R18,R19",0R,antmicro-footprints:R_0402_1005Metric,Panasonic,ERJ2GE0R00X,,8,https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C301.pdf,,
+R6,240R,antmicro-footprints:R_0402_1005Metric,Bourns,CR0402-FX-2400GLF,,1,https://www.bourns.com/docs/product-datasheets/cr.pdf,,
+"R9,R10,R11,R12",220R,antmicro-footprints:R_0402_1005Metric,Bourns,CR0402-FX-2200GLF,,4,https://www.bourns.com/docs/product-datasheets/cr.pdf,,
+"R3,R13,R14",10k,antmicro-footprints:R_0402_1005Metric,Bourns,CR0402-FX-1002GLF,,3,https://www.bourns.com/docs/product-datasheets/cr.pdf,,
+"TP1,TP2,TP3",TP_1mm_SMD,antmicro-footprints:TP_SMD_1mm,,,,3,,,no physical part - do not order
+U1,MT60B2G8HB-48B_A,antmicro-footprints:BGA-82_11x9mm_Layout13x11_P0.8mm_DDR5_MO-210-AN,Micron Technology,MT60B2G8HB-48B:A,,1,https://www.farnell.com/datasheets/3704816.pdf,,consign - DRAM not in JLCPCB SMT library
+U2,TPS613221A_SOT-23-5,antmicro-footprints:SOT-23-5,Texas Instruments,TPS613221ADBVT,,1,https://www.ti.com/lit/ds/symlink/tps61322.pdf?ts=1679307661323&ref_url=https%253A%252F%252Fwww.ti.com%252Fproduct%252FTPS61322%252Fpart-details%252FTPS613221ADBVT%253Futm_source%253Dgoogle%2526utm_medium%253Dcpc%2526utm_campaign%253Docb-tistore-promo-app_opn_en-cpc-storeic-google-wwe%2526utm_content%253DDevice%2526ds_k%253DTPS613221ADBVT%2526DCM%253Dyes%2526gclid%253DCjwKCAjwiOCgBhAgEiwAjv5whAbq73RvnAdgvLpW8LFuSFEla1kNqoJei2y0mTqS4-Xlc-1KWPDvLxoCIUoQAvD_BwE%2526gclsrc%253Daw.ds,,
