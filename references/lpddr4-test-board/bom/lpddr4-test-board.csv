@@ -38,8 +38,6 @@ L1,7u2/7.9A,antmicro-footprints:L_WE-PDF-1064,Würth Elektronik,7447798720,,1,ht
 "L2,L3,L5,L6",470n/3.4A,antmicro-footprints:L_WE-MAIA-2512,Würth Elektronik,784383240047,,4,https://www.we-online.com/catalog/datasheet/784383240047.pdf,C7040144,
 L4,470n/4.6A,antmicro-footprints:L_WE-MAIA-3015,Würth Elektronik,784383350047,,1,https://www.we-online.com/catalog/datasheet/784383350047.pdf,,
 "J8,MODE1",PinHeader_1x3_P2.54mm_Drill1.1mm,antmicro-footprints:PinHeader_1x3_P2.54mm_Drill1.1mm,Würth Elektronik,61300311121,,2,https://katalog.we-online.de/em/datasheet/6130xx11121.pdf,,
-N1,antmicro_logo,antmicro-footprints:antmicro-logo,,,,1,,,no physical part - do not order
-N2,oshw_logo,antmicro-footprints:oshw-logo,,,,1,,,no physical part - do not order
 "Q1,Q2,Q3,Q4,Q5,Q6,Q7",BSS138PW,antmicro-footprints:SC70-3,Nexperia,BSS138PW,,7,https://assets.nexperia.com/documents/data-sheet/BSS138PW.pdf,C18212688,
 "Q8,Q9,Q10,Q11",DMG1012T-7,antmicro-footprints:SOT-523,Diodes Incorporated,DMG1012T-7,,4,https://www.diodes.com/assets/Datasheets/ds31783.pdf,C7473321,
 Q12,SQS401EN-T1_BE3,antmicro-footprints:Vishay_PowerPAK_1212-8_Single,Vishay,SQS401EN-T1_BE3,,1,https://www.vishay.com/docs/65529/sqs401en.pdf,,
@@ -69,7 +67,6 @@ R104,53k6,antmicro-footprints:R_0402_1005Metric,Bourns,CR0402-FX-5362GLF,,1,http
 R154,10R,antmicro-footprints:R_0402_1005Metric,Bourns,CR0402-FX-10R0GLF,,1,https://www.bourns.com/docs/product-datasheets/cr.pdf,,
 S1,SW_EG1218,antmicro-footprints:SW_Slide_E-Switch_EG1218,E-Switch,EG1218,,1,https://www.tme.eu/Document/1d2d6ae5aacf9145a66729085fd4c381/P040040.pdf,,
 SP1,Spacer_H5.0mm_9774050151,antmicro-footprints:Spacer_Drill3.7mm_H5mm_9774050151R,Würth Elektronik,9774050151R,,1,https://www.we-online.com/catalog/datasheet/9774050151.pdf,,
-"TP1,TP2,TP3,TP4,TP5,TP6,TP7,TP8,TP9,TP10,TP11,TP12,TP13,TP14,TP15,TP16,TP17,TP18,TP19,TP20",TP_1mm_SMD,antmicro-footprints:TP_SMD_1mm,,,,20,,,no physical part - do not order
 U1,S27KL0641DABHI023,antmicro-footprints:FBGA-25-24_6x8mm_Layout5x5_P1mm,Cypress Semiconductor,S27KL0641DABHI023,,1,https://www.mouser.pl/datasheet/2/196/CYPR_S_A0011122227_1-3004854.pdf,,
 U2,100 MHz,antmicro-footprints:Oscillator_SMD_Abracon_ASFL1-4Pin_5.0x3.2mm,Abracon,ASFL1-100.000MHZ-L-T,,1,https://abracon.com/Oscillators/ASFL1.pdf,,
 U3,XC7K70T-FBG484,antmicro-footprints:BGA-484_23x23mm_Layout22x22_P1mm_FBG484,AMD-Xilinx,XC7K70T-1FBG484C,,1,https://docs.xilinx.com/v/u/en-US/ds182_Kintex_7_Data_Sheet,,consign - BGA FPGA not in JLCPCB SMT library

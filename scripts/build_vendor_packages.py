@@ -4,9 +4,14 @@
 Produces, per board, under <repo>/references/<board>/:
   gerbers/            Gerber X2 layer files + Excellon drill + drill map/report
   bom/<board>.csv     generic BOM (grouped; LCSC/Sourcing columns merged from
-                      pcb-vendors/lcsc_map.json if present)
+                      pcb-vendors/lcsc_map.json if present; board features
+                      like logos/test pads/mounting holes excluded)
   cpl/<board>-*.csv   pick-and-place, JLCPCB header names, top and bottom
+                      (same board-feature exclusions)
   README.md           order notes (not overwritten if it already exists)
+
+Plus, per board, the upload bundle pcb-vendors/<vendor>/<board>/<board>.zip
+(gerbers + vendor BOM/positions + README — the one file to send the fab).
 
 The script only reads the source repos; it never writes to them.
 
@@ -60,6 +65,13 @@ CONSIGN_HINTS = [
     (r"^(AMD-)?Xilinx:", "consign - BGA FPGA not in JLCPCB SMT library"),
     (r"^Micron( Technology)?:MT\d", "consign - DRAM not in JLCPCB SMT library"),
 ]
+
+# Footprints that are board features, not components: silkscreen logos, bare
+# test pads, net ties, mounting holes. Excluded from BOM and CPL output —
+# nothing to buy and nothing for the P&P machine to place, and keeping them
+# out avoids unmatched-part/placement errors in the vendor review tools.
+NO_PART_RE = re.compile(
+    r"logo|tp_smd|test[-_]?point|net[-_]?tie|mount(ing)?[-_]?hole", re.I)
 
 # JLCPCB wants BOM rows grouped; sort designators naturally (R2 before R10).
 def natkey(ref):
@@ -143,6 +155,9 @@ def gen_bom(b):
          b["repo"] / b["sch"], "-o", xml])
     comps = parse_bom_xml(xml)
 
+    # Logos, test pads, net ties, mounting holes: no part to order.
+    comps = [c for c in comps if not NO_PART_RE.search(c["footprint"])]
+
     lcsc_map = {}
     map_path = ROOT / "pcb-vendors" / "lcsc_map.json"
     if map_path.exists():
@@ -192,6 +207,10 @@ def gen_cpl(b):
         with tmp.open() as f:
             rows = list(csv.reader(f))
         header, body = rows[0], rows[1:]
+        # drop board features (logos, test pads, mounting holes, net ties):
+        # they are not in the BOM and must not be machine-placed either
+        body = [r for r in body
+                if not NO_PART_RE.search(r[header.index("Package")])]
         dst = out / f"{b['name']}-{suffix}.csv"
         with dst.open("w", newline="") as f:
             w = csv.writer(f)
@@ -234,16 +253,27 @@ def gen_vendor_package(b):
             pos_rows.extend(csv.DictReader(p.open()))
 
     if vendor == "macrofab":
-        with (out / f"{b['name']}-bom.csv").open("w", newline="") as f:
-            w = csv.writer(f)
-            w.writerow(["Designator", "Manufacturer", "MPN", "Quantity",
-                        "Value", "Package", "Description", "Datasheet",
-                        "LCSC Part #", "Sourcing"])
-            for r in bom_rows:
-                w.writerow([r["Designator"], r["Manufacturer"], r["MPN"],
-                            r["Quantity"], r["Name"], r["Footprint"],
-                            r["Description"], r["Datasheet"],
-                            r["LCSC Part #"], r["Sourcing"]])
+        mf_header = ["Designator", "Manufacturer", "MPN", "Quantity",
+                     "Value", "Package", "Description", "Datasheet",
+                     "LCSC Part #", "Sourcing"]
+        mf_rows = [[r["Designator"], r["Manufacturer"], r["MPN"],
+                    int(r["Quantity"]), r["Name"], r["Footprint"],
+                    r["Description"], r["Datasheet"],
+                    r["LCSC Part #"], r["Sourcing"]] for r in bom_rows]
+        try:
+            from openpyxl import Workbook
+            wb = Workbook()
+            ws = wb.active
+            ws.title = "BOM"
+            ws.append(mf_header)
+            for row in mf_rows:
+                ws.append(row)
+            wb.save(out / f"{b['name']}-bom.xlsx")
+        except ImportError:
+            with (out / f"{b['name']}-bom.csv").open("w", newline="") as f:
+                w = csv.writer(f)
+                w.writerow(mf_header)
+                w.writerows(mf_rows)
     else:  # pcbway
         try:
             from openpyxl import Workbook
@@ -287,6 +317,23 @@ def gen_vendor_package(b):
     return len(bom_rows), len(pos_rows)
 
 
+def gen_zip(b):
+    """One-file upload bundle: <board>.zip inside the vendor package dir with
+    everything the fab needs (gerbers, BOM, positions, README). Existing zips
+    are skipped so regeneration never embeds a stale archive."""
+    import zipfile
+
+    pkg = ROOT / "pcb-vendors" / b["vendor"] / b["name"]
+    if not pkg.is_dir():
+        raise SystemExit(f"vendor package missing (run --step vendors first): {pkg}")
+    arc = pkg / f'{b["name"]}.zip'
+    files = sorted(p for p in pkg.rglob("*") if p.is_file() and p.suffix != ".zip")
+    with zipfile.ZipFile(arc, "w", zipfile.ZIP_DEFLATED) as z:
+        for p in files:
+            z.write(p, p.relative_to(pkg))
+    return arc, len(files)
+
+
 def verify(b):
     """Cross-check BOM designators against CPL designators and gerber sanity."""
     problems = []
@@ -307,21 +354,15 @@ def verify(b):
             for row in csv.DictReader(f):
                 cpl_refs.add(row["Designator"].strip())
 
-    # Test points / net ties legitimately carry no placement data; mounting
-    # holes exist only on the PCB. Anything else missing in either direction
-    # is a real problem.
+    # Both outputs are filtered upstream (no-part footprints are excluded from
+    # BOM and CPL), so any remaining mismatch in either direction is a real
+    # problem.
     only_bom = sorted(bom_refs - cpl_refs, key=natkey)
     only_cpl = sorted(cpl_refs - bom_refs, key=natkey)
-    odd_bom = [r for r in only_bom if not re.match(r"^(TP\d+|N\d+)$", r)]
-    odd_cpl = [r for r in only_cpl if not re.match(r"^MH\d+$", r)]
-    if odd_bom:
-        problems.append(f"in BOM but not CPL: {odd_bom}")
-    if odd_cpl:
-        problems.append(f"in CPL but not BOM: {odd_cpl}")
     if only_bom:
-        print(f"  note: no-placement refs (excluded from CPL): {only_bom}")
+        problems.append(f"in BOM but not CPL: {only_bom}")
     if only_cpl:
-        print(f"  note: PCB-only refs (not in schematic BOM): {only_cpl}")
+        problems.append(f"in CPL but not BOM: {only_cpl}")
 
     g = jl / "gerbers"
     names = [p.name for p in g.iterdir()]
@@ -338,13 +379,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--board", action="append", choices=[b["name"] for b in BOARDS])
     ap.add_argument("--step", default="all",
-                    choices=["gerbers", "bom", "cpl", "vendors", "verify", "all"])
+                    choices=["gerbers", "bom", "cpl", "vendors", "verify", "zip", "all"])
     args = ap.parse_args()
 
     boards = [b for b in BOARDS if not args.board or b["name"] in args.board]
     for b in boards:
         print(f"\n=== {b['name']} ===")
-        steps = ["gerbers", "bom", "cpl", "vendors", "verify"] \
+        steps = ["gerbers", "bom", "cpl", "vendors", "verify", "zip"] \
             if args.step == "all" else [args.step]
         if "gerbers" in steps:
             files = gen_gerbers(b)
@@ -366,6 +407,9 @@ def main():
                     print(f"  !! {p}")
             else:
                 print(f"  verify OK ({nb} BOM refs == {nc} CPL refs, gerbers sane)")
+        if "zip" in steps:
+            arc, n = gen_zip(b)
+            print(f"  upload zip: {arc.relative_to(ROOT)} ({n} files)")
     print()
 
 

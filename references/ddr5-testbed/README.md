@@ -8,11 +8,11 @@ Source: `antmicro/ddr5-testbed` @ `5db928c` (local clone, unmodified).
 | Path | Purpose |
 |---|---|
 | `gerbers/` | Gerber X2 (Protel extensions) + Excellon drill `PTH.drl` / `NPTH.drl` (mm) + drill maps + `drill-report.txt` |
-| `bom/ddr5-testbed.csv` | generic BOM, 62 placements / 18 unique parts |
+| `bom/ddr5-testbed.csv` | generic BOM, 57 placements / 15 unique parts |
 | `cpl/ddr5-testbed-{top,bottom}.csv` | generic pick & place, mm |
 
 **Vendor package** (self-contained, upload this): `../../pcb-vendors/pcbway/ddr5-testbed/`
-— gerber copy + PCBWay BOM XLSX + positions CSV + this README.
+— gerber copy + PCBWay BOM XLSX + positions CSV + this README, bundled as one upload zip (`ddr5-testbed.zip`).
 
 ## PCB order spec
 
@@ -27,7 +27,8 @@ Source: `antmicro/ddr5-testbed` @ `5db928c` (local clone, unmodified).
 
 - **Consigned:** `U1` — Micron **MT60B2G8HB-48B:A** DDR5 (flagged in BOM
   `Sourcing` column).
-- Rows `N1/N2` (net ties) and `TP1–TP3` marked `no physical part - do not order`.
+- `N1`/`N2` (Antmicro/OSHW silkscreen logos) and `TP1`–`TP3` (bare test pads)
+  carry no parts — excluded from the BOM and positions files.
 
 ## Ordering at PCBWay
 

@@ -23,7 +23,8 @@ the testbed DRAMs are consigned in either flow.
   in here is regenerated from the source repos.
 - `<vendor>/<board>/` — **self-contained vendor package**: a gerber copy plus
   that vendor's BOM/position formats and the board README. This is what you
-  upload; zip the vendor board directory and send it.
+  upload; the build script bundles it into a single `<board>.zip` inside the
+  directory — send that one file.
 
 ```
 pcb-vendors/

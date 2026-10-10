@@ -8,11 +8,11 @@ Source: `antmicro/lpddr4-test-board` @ `5c8b5d3` (local clone, unmodified).
 | Path | Purpose |
 |---|---|
 | `gerbers/` | Gerber X2 (Protel extensions) + Excellon drill `PTH.drl` / `NPTH.drl` (mm) + drill maps + `drill-report.txt` |
-| `bom/lpddr4-test-board.csv` | generic BOM (JLCPCB-style columns), 416 placements / 83 unique parts |
+| `bom/lpddr4-test-board.csv` | generic BOM (JLCPCB-style columns), 394 placements / 80 unique parts |
 | `cpl/lpddr4-test-board-{top,bottom}.csv` | generic pick & place, mm |
 
 **Vendor package** (self-contained, upload this): `../../pcb-vendors/macrofab/lpddr4-test-board/`
-— gerber copy + MacroFab BOM CSV + single-file positions + this README.
+— gerber copy + MacroFab BOM XLSX + single-file positions + this README, bundled as one upload zip (`lpddr4-test-board.zip`).
 
 ## PCB order spec
 
@@ -31,9 +31,10 @@ Source: `antmicro/lpddr4-test-board` @ `5c8b5d3` (local clone, unmodified).
 - **Consigned:** `U3` — AMD-Xilinx **XC7K70T-1FBG484C** BGA-484 FPGA (flagged in BOM
   `Sourcing` column). Buy from DigiKey/Mouser and ship to the consignment
   address MacroFab assigns at order time.
-- Rows marked `no physical part - do not order` (test points TP1–TP20, net tie
-  N2) are intentionally unmatched — mark them do-not-place in the MacroFab BOM
-  review.
+- `N1`/`N2` (Antmicro/OSHW silkscreen logos) and `TP1`–`TP20` (bare 1 mm test
+  pads) carry no parts — they are excluded from the BOM and positions files, so
+  there is nothing to mark do-not-place. Mounting holes `MH1`–`MH4` are likewise
+  absent from the positions file.
 - After uploading positions, verify component rotations in their viewer
   (KiCad vs house rotation conventions differ for some footprints).
 
@@ -41,7 +42,7 @@ Source: `antmicro/lpddr4-test-board` @ `5c8b5d3` (local clone, unmodified).
 
 1. Create a project at macrofab.com, upload the `gerbers/` zip. Set: 4 layers,
    1.6 mm, ENIG, 110 × 90 mm.
-2. Add assembly; upload `../../pcb-vendors/macrofab/lpddr4-test-board/lpddr4-test-board-bom.csv` and
+2. Add assembly; upload `../../pcb-vendors/macrofab/lpddr4-test-board/lpddr4-test-board-bom.xlsx` and
    `../../pcb-vendors/macrofab/lpddr4-test-board/lpddr4-test-board-positions.csv`. Confirm the
    column mapping in their importer (Designator / Manufacturer / MPN / Quantity
    for the BOM; Designator / Mid X / Mid Y / Rotation / Layer for positions).

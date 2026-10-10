@@ -8,11 +8,11 @@ Source: `antmicro/lpddr4-testbed` @ `93e67cf` (local clone, unmodified).
 | Path | Purpose |
 |---|---|
 | `gerbers/` | Gerber X2 (Protel extensions) + Excellon drill `PTH.drl` / `NPTH.drl` (mm) + drill maps + `drill-report.txt` |
-| `bom/lpddr4-testbed.csv` | generic BOM, 64 placements / 14 unique parts |
+| `bom/lpddr4-testbed.csv` | generic BOM, 61 placements / 13 unique parts |
 | `cpl/lpddr4-testbed-{top,bottom}.csv` | generic pick & place, mm |
 
 **Vendor package** (self-contained, upload this): `../../pcb-vendors/pcbway/lpddr4-testbed/`
-— gerber copy + PCBWay BOM XLSX + positions CSV + this README.
+— gerber copy + PCBWay BOM XLSX + positions CSV + this README, bundled as one upload zip (`lpddr4-testbed.zip`).
 
 ## PCB order spec
 
@@ -25,7 +25,8 @@ Source: `antmicro/lpddr4-testbed` @ `93e67cf` (local clone, unmodified).
 
 - **Consigned:** `U1` — Micron **MT53E1G32D2NP-046 WT:A** LPDDR4, BGA-200
   (flagged in BOM `Sourcing` column).
-- Row `TP1–TP3` marked `no physical part - do not order`.
+- `TP1`–`TP3` are bare test pads — excluded from the BOM and positions files
+  (no parts to place).
 - Antmicro sources the passives/ICs (Yageo/Murata/Walsin/Panasonic/Kingbright/
   NXP/Atmel/TI) outside JLCPCB's catalog — PCBWay's partial-turnkey sourcing
   buys the exact MPNs from normal distribution instead.
